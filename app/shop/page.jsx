@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import "@styles/Shop.scss";
+import { Suspense } from "react";
 
 const Shop = () => {
   const [loading, setLoading] = useState(true);
@@ -45,15 +46,15 @@ const Shop = () => {
     <>
       <Navbar />
 
-      {loggedInUserId === profileId && (
-        <h1 className="title-list">Your Works</h1>
-      )}
-
-      {loggedInUserId !== profileId && (
-        <h1 className="title-list">{profile.username}'s Works</h1>
-      )}
-
-      <WorkList data={workList} />
+      <Suspense>
+        {loggedInUserId === profileId && (
+          <h1 className="title-list">Your Works</h1>
+        )}
+        {loggedInUserId !== profileId && (
+          <h1 className="title-list">{profile.username}'s Works</h1>
+        )}
+        <WorkList data={workList} />
+      </Suspense>
     </>
   );
 };

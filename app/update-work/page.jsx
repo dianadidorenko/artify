@@ -6,6 +6,7 @@ import Loader from "@components/Loader";
 import Form from "@components/Form";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Suspense } from "react";
 
 const UpdateWork = () => {
   const { data: session } = useSession();
@@ -83,12 +84,14 @@ const UpdateWork = () => {
   ) : (
     <>
       <Navbar />
-      <Form
-        type="Edit"
-        work={work}
-        setWork={setWork}
-        handleSubmit={handleSubmit}
-      />
+      <Suspense>
+        <Form
+          type="Edit"
+          work={work}
+          setWork={setWork}
+          handleSubmit={handleSubmit}
+        />
+      </Suspense>
     </>
   );
 };
