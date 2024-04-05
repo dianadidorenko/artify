@@ -28,7 +28,7 @@ export async function POST(req) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const profileImagePath = `/Users/diana/Desktop/react-js/artify/public/uploads${file.name}`;
+    const profileImagePath = `/uploads${file.name}`;
     await writeFile(profileImagePath, buffer);
 
     console.log(`open ${profileImagePath} to see the uploaded files`);
